@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GotScreen.HotKeys;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
@@ -9,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GotScreen.HotKeys;
 
 namespace GotScreen
 {
@@ -25,7 +27,30 @@ namespace GotScreen
         public MainWindow()
         {
             InitializeComponent();
+
+
+            // need to setup the global hook. this can go in
+            // App.xaml.cs's constructor if you want
+            HotkeysManager.SetupSystemHook();
+
+            // You can create a globalhotkey object and pass it like so
+            HotkeysManager.AddHotkey(new GlobalHotkey(ModifierKeys.Control, Key.S, () => { AddToList("Ctrl+S Fired"); }));
+
+            // or do it like this. both end up doing the same thing, but this is probably simpler.
+            HotkeysManager.AddHotkey(ModifierKeys.Control, Key.A, () => { AddToList("Ctrl+A Fired"); });
+            HotkeysManager.AddHotkey(ModifierKeys.Control, Key.D, () => { AddToList("Ctrl+D Fired"); });
+            HotkeysManager.AddHotkey(ModifierKeys.Shift, Key.D, () => { AddToList("Shift+D Fired"); });
+
+            Closing += MainWindow_Closing;
         }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Need to shutdown the hook. idk what happens if
+            // you dont, but it might cause a memory leak.
+            HotkeysManager.ShutdownSystemHook();
+        }
+
         void OnMouseLeftButtonDownHandler(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (rectangle == null)
@@ -82,7 +107,7 @@ namespace GotScreen
 
                     Bitmap cutImg = Cut(img, (int)firstposition.X, (int)firstposition.Y, (int)secondposition.X, (int)secondposition.Y);
                     cutImg.Save("cut.jpg", ImageFormat.Jpeg);
-                    System.Windows.Clipboard.SetImage(new BitmapImage(new Uri(@"C:\Users\User\source\repos\Other\GotScreen\GotScreen\bin\Debug\net7.0-windows\cut.jpg")));
+                    System.Windows.Clipboard.SetImage(new BitmapImage(new Uri(@"C:\Users\Admin\Documents\GitHub\GotScreen\GotScreen\GotScreen\bin\Debug\net7.0-windows\cut.jpg")));
                     this.Close();
                 }
             }
@@ -150,7 +175,7 @@ namespace GotScreen
             {
                 Width = bitmap.Width / GetWindowsScaling(),
                 Height = bitmap.Height / GetWindowsScaling(),
-                Source = new BitmapImage(new Uri(@"C:\Users\User\source\repos\Other\GotScreen\GotScreen\bin\Debug\net7.0-windows\test.jpg")),
+                Source = new BitmapImage(new Uri(@"C:\Users\Admin\Documents\GitHub\GotScreen\GotScreen\GotScreen\bin\Debug\net7.0-windows\test.jpg")),
             };
             Canvas.SetTop(BodyImage, 0);
             Canvas.SetLeft(BodyImage, 0);

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "IajUzLmxkMcAcEUqMmm20ZJDhFMYVn51GTfWGDmuT09ahrRvUGwbnS6gPyAehdkp3RYW7HJ9xBUvEO1NnmdW1A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Admin\\Documents\\GitHub\\GotScreen\\GotScreen\\GotScreen\\GotScreen.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\Admin\Documents\GitHub\GotScreen\GotScreen\GotScreen\App.xaml
-11407045341
+3827826525
 
-3-1233169557
+101246870226
 207634024511
-MainWindow.xaml;
+ChooseWindow.xaml;ScreenWindow.xaml;StartWindow.xaml;
 
 False
 
